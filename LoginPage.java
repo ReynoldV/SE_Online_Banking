@@ -199,7 +199,7 @@ public class LoginPage extends JFrame implements ActionListener
             // Do other thing
             if (customer != null)
             {
-                System.out.println("Success");
+                // Debug System.out.println("Success");
                 //Show homepage for the customer
                 HomePage home = new HomePage(logic, customer);
                 emailField.setText("");
@@ -209,7 +209,7 @@ public class LoginPage extends JFrame implements ActionListener
             }
             else
             {
-                System.out.println("Incorrect");
+                // Debug System.out.println("Incorrect");
                 JOptionPane.showMessageDialog(this, "Email/Password invalid. Try again.");
                 emailField.setText("");
                 passwordField.setText("");

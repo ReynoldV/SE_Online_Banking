@@ -19,7 +19,7 @@ public class CA extends People
     ArrayList<Request> requests;
 
     // NOTE: Will need to remove later, don't remove or everything breaks
-    private static final long serialVersionUID = 1L;
+    // private static final long serialVersionUID = 1L;
 
     public CA(String firstName, String lastName, String phoneNum, String address, String gender, String dob,
               String email, String password, String cardNum, String cardExpiry, String cvv)
@@ -105,8 +105,8 @@ public class CA extends People
         requests.add(request);
     }
     public void print() {
-        System.out.printf("serialVersionUID: %d | First Name: %-10s Last Name: %-10s | Email: %-25s | Password: %-10s " +
-                "| Address: %-20s | ID: %04d%n", serialVersionUID, firstName, lastName, email, password, address);
+        System.out.printf("First Name: %-10s Last Name: %-10s | Email: %-25s | Password: %-10s " +
+                "| Address: %-20s | ID: %04d%n", firstName, lastName, email, password, address);
     }
     public void printHistory() {
         System.out.printf("%s %s -> ", firstName, lastName);

@@ -3,6 +3,7 @@ import org.junit.Test;
 import javax.swing.*;
 import java.util.stream.IntStream;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNull;
 
@@ -50,7 +51,7 @@ public class TestCase {
         
         startTime = System.currentTimeMillis();
 
-        dummy = BA.loginAccount("1@gmail.com", "Hello@World1");
+        dummy = BA.loginAccount("12312@gmail.com", "Hello@World1");
         assertNotEquals(dummy, null);
 
         endTime = System.currentTimeMillis();
@@ -84,6 +85,8 @@ public class TestCase {
                 "Other", "01/01/1990", "test@gmail.com", "Hello@World1",
                 "4417123456789113", "01/01/2027", "555");
         assertNull(dummy);
+
+        assertEquals(BA.customerAccounts.size(), 1);
 
         JOptionPane.showMessageDialog(null, "Test cases passed", "testRegister", JOptionPane.INFORMATION_MESSAGE);
         
