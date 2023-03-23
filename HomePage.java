@@ -12,8 +12,6 @@ public class HomePage extends JFrame implements ActionListener
         this.setTitle("Account Home");
         this.setLayout(null);
 
-
-
         this.getContentPane().setBackground(Color.white);
         this.setSize(WIDTH, LENGTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

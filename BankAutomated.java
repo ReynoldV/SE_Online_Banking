@@ -1,56 +1,89 @@
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.*;
 
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
 public class BankAutomated
 {
     List<CA> customerAccounts = Collections.synchronizedList(new ArrayList<CA>());
     private final ConcurrentHashMap<String, CA> customerHash;
+    private final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     @SuppressWarnings("SpellCheckingInspection")
     public enum State {REGISTER, FORGOT, HOME, ACCOUNT, ETRANS, BANKTRANS, FUNDTRANS, MEETREQ, MAKEREP, LOCATE,
                         NOTIF, NOTIFSET, PRIVSET, EDITPROF, SETTINGS}
 
-    public BankAutomated()
-    {   
-        // Email -> Account, thread save Hash map
+    public BankAutomated() {
+        // Email -> Account, thread safe Hash map
         this.customerHash = new ConcurrentHashMap<>();
 
         System.out.println("Loading customer objects...");
 
+        long startTime = System.currentTimeMillis();
+
         // Load customer account data from the "People.ser" serialized file
         try (FileInputStream accountsInput = new FileInputStream("People.ser");
-            BufferedInputStream bufferedIn = new BufferedInputStream(accountsInput);
-            ObjectInputStream accountObject = new ObjectInputStream(bufferedIn)) {
-            
-            // Read each serialized object until the end of the file is reached
+             BufferedInputStream bufferedIn = new BufferedInputStream(accountsInput);
+             ObjectInputStream accountObject = new ObjectInputStream(bufferedIn)) {
+
+            // Read all the CA objects from the serialized file into a list
+            List<CA> accounts = new ArrayList<>();
             while (true) {
                 try {
-                    // Read the next CA object from the serialized file
                     CA account = (CA) accountObject.readObject();
-
-                    // Add the account to customerAccounts arrayList
-                    customerAccounts.add(account);
-
-                    // Add email and object to hashmap
-                    customerHash.put(account.email, account);
-
+                    accounts.add(account);
                 } catch (EOFException ex) {
-                    // End of file reached, break out of the loop
                     break;
                 }
             }
+
+            // Submit each account to the executor for processing
+            List<Future<Void>> futures = new ArrayList<>();
+            for (CA account : accounts) {
+                futures.add(executor.submit(() -> {
+                    customerAccounts.add(account);
+                    customerHash.put(account.email, account);
+                    return null;
+                }));
+            }
+
+            // Wait for all tasks to complete and handle any exceptions
+            futures.forEach(future -> {
+                try {
+                    future.get();
+                } catch (InterruptedException | ExecutionException ex) {
+                    ex.printStackTrace();
+                }
+            });
+
         } catch (FileNotFoundException ex) {
             // usually means nothing is inside
-        } catch (IOException | ClassNotFoundException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            clearPeopleFile();
         }
-        
-        System.out.println("Loaded " + customerAccounts.size() + " customer objects.");
-        
-        // Debug customerAccounts.forEach(CA::print);
-        // Debug customerAccounts.forEach(CA::printHistory);
+
+        long endTime = System.currentTimeMillis();
+        double timePassedSeconds = (endTime - startTime) / 1000.0;
+
+        System.out.println("Loaded " + customerAccounts.size() + " customer objects. In: " + timePassedSeconds + "s");
+    }
+
+    public void clearPeopleFile() {
+        try {
+            // Delete the file
+            Files.deleteIfExists(Paths.get("People.ser"));
+    
+            // Create a new empty file
+            Files.createFile(Paths.get("People.ser"));
+    
+            System.out.println("Cleared People.ser file");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // Validate email format
@@ -74,6 +107,7 @@ public class BankAutomated
         return customerHash.containsKey(email);
     }
 
+    // Validate password format
     public boolean validPassword(String password)
     {
         if (password.length() < 8)
@@ -88,6 +122,7 @@ public class BankAutomated
 
         int lowerCharCount = 0; int upperCharCount = 0; int numCount = 0; int specialCount = 0;
 
+        // Check if the password contains at least one of each type of character
         for (int i = 0; i < password.length(); i++)
         {
             char current = password.charAt(i);
@@ -151,92 +186,77 @@ public class BankAutomated
         return false;
     }
 
+    // Checks if the date of birth is valid
     public boolean validDOB(String month, String day, String year)
     {
-        if (month.equals("02"))
-        {
-            // For February, we check for leap years
-            int numYear = Integer.parseInt(year);
-            int numDay = Integer.parseInt(day);
-            if (numYear %  4 == 0)
-            {
-                if (numYear % 100 == 0)
-                {
-                    if (numYear % 400 == 0)
-                    {
-                        return numDay <= 29;
-                    }
-                    else
-                    {
-                        return numDay <= 28;
-                    }
-                }
-                else
-                {
-                    return numDay <= 29;
-                }
-            }
-            else
-            {
-                return numDay <= 28;
-            }
-        }
-        else if (month.equals("04") || month.equals("06") || month.equals("09") || month.equals("11"))
-        {
-            return !day.equals("31");
-        }
+        int numYear = Integer.parseInt(year);
+        int numDay = Integer.parseInt(day);
 
-        return true;
+        switch(month) {
+            case "02":
+                if (numYear % 4 == 0 && (numYear % 100 != 0 || numYear % 400 == 0)) {
+                    return numDay <= 29;
+                } else {
+                    return numDay <= 28;
+                }
+            case "04":
+            case "06":
+            case "09":
+            case "11":
+                return numDay <= 30;
+            default:
+                return numDay <= 31;
+        }
     }
 
     //Checks for the validity of the card number by various measures, i.e. length, starting digit, Luhn's algorithm
     public boolean validCard(String cardNum)
     {
         // If the length is not between 13 and 19 digits, then the card number is invalid
-        if (cardNum.length() < 13 || cardNum.length() > 19)
-        {
-            return false;
-        }
-
         // If input was not all digits, then cardNum is invalid
-        if (!onlyNumeric(cardNum))
-        {
-            return false;
-        }
-
         // Card numbers only start with 4 (Visa), 3 (American Express), 2 or 5 (Mastercard)
-        if (cardNum.charAt(0) != '2' && cardNum.charAt(0) != '3' && cardNum.charAt(0) != '4' &&
-                cardNum.charAt(0) != '5')
+
+        if (cardNum.length() < 13 || cardNum.length() > 19 || !onlyNumeric(cardNum) ||
+                !(cardNum.charAt(0) == '4' || cardNum.charAt(0) == '3' || cardNum.charAt(0) == '2' || cardNum.charAt(0) == '5'))
         {
             return false;
         }
 
-        // Luhn's algorithm
+        // Luhn's algorithm to check if the card number is valid
         int sum = 0;
         boolean alternate = false;
 
+        // Loop through the card number backwards
         for (int i = cardNum.length() - 1; i >= 0; i--)
         {
+
+            // Get the digit at the current index
             int n = cardNum.charAt(i) - '0';
 
+            // If the current digit is the second digit from the right, then double it
             if (alternate)
             {
                 n = n*2;
             }
 
+            // If the current digit is greater than 9, then add the two digits together
             if (n>9)
             {
                 sum += (n/10);
                 sum += n%10;
             }
+
+            // Else, add the current digit to the sum
             else
             {
                 sum += n;
             }
 
+            // Alternate between true and false
             alternate = !alternate;
         }
 
+        // If the sum is divisible by 10, then the card number is valid
         return sum % 10 == 0;
     }
 
@@ -330,25 +350,63 @@ public class BankAutomated
 
     public void logout()
     {
-        System.out.println("Uploading customer objects...");
-    
-        // Create FileOutputStream and BufferedOutputStream for writing to file
-        try (FileOutputStream accountsFile = new FileOutputStream("People.ser");
-            BufferedOutputStream bufferedOut = new BufferedOutputStream(accountsFile);
-            ObjectOutputStream accountObject = new ObjectOutputStream(bufferedOut)) {
-            
-            // Write each customer account to the file
-            customerAccounts.forEach(account -> {
-                try {
-                    accountObject.writeObject(account);
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                }
-            });
-        } catch (IOException ex) {
-            ex.printStackTrace();
+
+        long startTime = System.currentTimeMillis();
+
+        System.out.println("Uploading customer objects");
+
+        ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
+
+        // Create a Callable that writes each customer account to the file
+        Callable<Void> task = () -> {
+
+            // Try-with-resources to automatically close the streams
+            try (FileOutputStream accountsFile = new FileOutputStream("People.ser");
+                
+                // BufferedOutputStream is used to improve performance 
+                BufferedOutputStream bufferedOut = new BufferedOutputStream(accountsFile);
+
+                // ObjectOutputStream is used to write objects to the file
+                ObjectOutputStream accountObject = new ObjectOutputStream(bufferedOut)) {
+
+                // Write each customer account to the file
+                customerAccounts.forEach(account -> {
+                    try {
+                        accountObject.writeObject(account);
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                });
+                return null;
+
+            // Catch any exceptions that may occur
+            } catch (IOException ex) {
+                ex.printStackTrace();
+                return null;
+            }
+        };
+
+        // Submit the task to the executor for each available processor
+        List<Future<Void>> futures = new ArrayList<>();
+        for (int i = 0; i < Runtime.getRuntime().availableProcessors(); i++) {
+            futures.add(executor.submit(task));
         }
 
-        System.out.println("Uploaded customer objects.");
+        // Wait for all tasks to complete and shutdown the executor
+        futures.forEach(future -> {
+            try {
+                future.get();
+            } catch (InterruptedException | ExecutionException ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        long endTime = System.currentTimeMillis();
+        double timePassedSeconds = (endTime - startTime) / 1000.0;
+
+        System.out.println("Uploaded " + customerAccounts.size() + " customer objects. In: " + timePassedSeconds + "s");
+
+        executor.shutdown();
+
     }
 }
