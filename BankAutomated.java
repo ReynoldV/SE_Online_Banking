@@ -1,5 +1,6 @@
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.concurrent.*;
@@ -61,9 +62,11 @@ public class BankAutomated
         } catch (FileNotFoundException ex) {
             // usually means nothing is inside
         } catch (IOException ex) {
-            ex.printStackTrace();
+            // System.out.println("nothing inside");
+            // usually means the file is corrupted or nothing inside
+            // ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
-            clearPeopleFile();
+            // the CA object that was serialized was changed after it had been serialized
         }
 
         long endTime = System.currentTimeMillis();
@@ -72,15 +75,22 @@ public class BankAutomated
         System.out.println("Loaded " + customerAccounts.size() + " customer objects. In: " + timePassedSeconds + "s");
     }
 
+    // Clear the People.ser file
     public void clearPeopleFile() {
         try {
+
             // Delete the file
             Files.deleteIfExists(Paths.get("People.ser"));
     
             // Create a new empty file
             Files.createFile(Paths.get("People.ser"));
-    
+            
+            // Print a message
             System.out.println("Cleared People.ser file");
+
+        // File doesn't exist
+        } catch (NoSuchFileException ex) {
+            System.out.println("People.ser file doesn't exist");
         } catch (IOException e) {
             e.printStackTrace();
         }
