@@ -424,7 +424,7 @@ public class RegisterPage extends JFrame implements ActionListener
             {
                 JOptionPane.showMessageDialog(this,"Password is invalid. Password must contain:" +
                         "\n-At least one lowercase and one uppercase character\n-At least one number\n-At least one" +
-                        "special character\n-At least 8 characters overall.");
+                        " special character\n-At least 8 characters overall.");
                 passwordField.setText("");
                 return;
             }
@@ -438,6 +438,7 @@ public class RegisterPage extends JFrame implements ActionListener
             else if (!BA.onlyNumeric(phoneNum) || phoneNum.length() != 10)
             {
                 JOptionPane.showMessageDialog(this, "Phone Number is invalid");
+                telNumField.setText("");
                 return;
             }
             else
