@@ -209,5 +209,11 @@ public class HomePage extends JFrame implements ActionListener
             this.setVisible(false);
             this.setVisible(true);
         }
+        else if (e.getSource() == logoutButton)
+        {
+            this.setVisible(false);
+            previous.setVisible(true);
+        }
+        //else if(e.getSource() == )
     }
 }
