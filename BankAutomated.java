@@ -68,6 +68,7 @@ public class BankAutomated
             // ex.printStackTrace();
         } catch (ClassNotFoundException ex) {
             // the CA object that was serialized was changed after it had been serialized
+            clearPeopleFile();
         }
 
         long endTime = System.currentTimeMillis();

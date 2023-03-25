@@ -130,7 +130,7 @@ public class HomePage extends JFrame implements ActionListener
         cheqAmountButton.setForeground(Color.black);
         cheqAmountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cheqAmountButton.setHorizontalAlignment(SwingConstants.RIGHT);
-        cheqAmountButton.setBounds(612, 250, 613, 100);
+        cheqAmountButton.setBounds(610, 250, 630, 100);
         cheqAmountButton.addActionListener(this);
         this.add(cheqAmountButton);
 
@@ -159,7 +159,8 @@ public class HomePage extends JFrame implements ActionListener
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e)
+    {
 
     }
 }
