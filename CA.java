@@ -34,6 +34,8 @@ public class CA extends People
         this.cvv = cvv;
         this.gender = gender;
         this.dob = dob;
+        this.chequing = chequing;
+        this.savings = savings;
 
         chequingHist = new ArrayList<Transaction>();
         savingsHist = new ArrayList<Transaction>();
@@ -42,13 +44,13 @@ public class CA extends People
     }
 
     // UPDATE ALL SETTERS AND GETTERS TO BE FOR EACH PARAMETER
-    public void setCardexpiry()
+    public void setCardExpiry()
     {
         this.cardExpiry = cardExpiry;
 
     }
 
-    public String getCardexpiry()
+    public String getCardExpiry()
     {
         return cardExpiry;
     }
