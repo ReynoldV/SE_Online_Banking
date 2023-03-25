@@ -11,8 +11,8 @@ public class CA extends People
     String dob;
     String cardExpiry;
     String cvv;
-    float chequing;
-    float savings;
+    double chequing;
+    double savings;
     ArrayList<Transaction> chequingHist;
     ArrayList<Transaction> savingsHist;
     ArrayList<Report> reportSus;
@@ -22,8 +22,8 @@ public class CA extends People
     // private static final long serialVersionUID = 1L;
 
     public CA(String firstName, String lastName, String phoneNum, String address, String gender, String dob,
-              String email, String password, String cardNum, String cardExpiry, String cvv, float chequing,
-              float savings)
+              String email, String password, String cardNum, String cardExpiry, String cvv, double chequing,
+              double savings)
     {
         super(firstName, lastName, email, phoneNum);
         this.address = address;
@@ -128,7 +128,7 @@ public class CA extends People
         this.chequing = chequing;
 
     }
-    public float getChequing()
+    public double getChequing()
     {
         return chequing;
     }
@@ -138,7 +138,7 @@ public class CA extends People
         this.savings = savings;
 
     }
-    public float getSavings()
+    public double getSavings()
     {
         return savings;
     }
