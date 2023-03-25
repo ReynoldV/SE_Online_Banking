@@ -84,6 +84,8 @@ public class BankAutomated
             // Delete the file
             Path of = Path.of("People.ser");
             Files.deleteIfExists(of);
+            customerAccounts.clear();
+            customerHash.clear();
     
             // Create a new empty file
             Files.createFile(of);
