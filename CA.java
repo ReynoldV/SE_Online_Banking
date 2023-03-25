@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import java.lang.Math;
 
 // customer account
 public class CA extends People
@@ -22,8 +23,8 @@ public class CA extends People
     // private static final long serialVersionUID = 1L;
 
     public CA(String firstName, String lastName, String phoneNum, String address, String gender, String dob,
-              String email, String password, String cardNum, String cardExpiry, String cvv, float chequing,
-              float savings)
+              String email, String password, String cardNum, String cardExpiry, String cvv, double chequing,
+              double savings)
     {
         super(firstName, lastName, email, phoneNum);
         this.address = address;
@@ -126,9 +127,9 @@ public class CA extends People
         this.chequing = chequing;
 
     }
-    public float getChequing()
+    public double getChequing()
     {
-        return chequing;
+        return Math.round(chequing *100.0)/100.0;
     }
 
     public void setSaving()
@@ -136,9 +137,9 @@ public class CA extends People
         this.savings = savings;
 
     }
-    public float getSavings()
+    public double getSavings()
     {
-        return savings;
+        return Math.round(savings*100.0)/100.0;
     }
 
     // Getter and setter for chequing transaction history
