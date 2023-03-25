@@ -5,7 +5,7 @@ public class BankSystem
         try
         {
             BankAutomated BA = new BankAutomated();
-            BA.clearPeopleFile();
+            BA.customerAccounts.clear();
             CA test= BA.createAccount("Mo", "N", "6667771111", "Yonge Street", "Male",
                                 "01/02/2003", "this2@gmail.com", "Hello@World1",
                             "4417123456789113", "0521", "111");
