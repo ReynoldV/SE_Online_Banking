@@ -3,20 +3,23 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class ETransferPage extends JFrame implements ActionListener
 {
     static final int WIDTH = 1920;
     static final int LENGTH = 1080;
 
+    BankAutomated BA;
     HomePage home;
     CA customer;
-    public ETransferPage(HomePage home, CA customer)
+    public ETransferPage(BankAutomated BA, HomePage home, CA customer)
     {
         this.setTitle("Account Home");
         this.setLayout(null);
         this.home = home;
         this.customer = customer;
+        this.BA = BA;
 
         Font labels = new Font("Raleway", Font.BOLD, 25);
         Border emptyBorder = BorderFactory.createEmptyBorder();
@@ -24,6 +27,21 @@ public class ETransferPage extends JFrame implements ActionListener
         Color bg = new Color(214, 215, 215);
         Color buttonColor = Color.BLACK;
 
+        this.addWindowListener(new WindowEventHandler() {
+            @Override
+            public void windowClosing(WindowEvent evt) {
+                //BA.logout (logic.logout) would be called here
+                //Write all changes to the file
+                BA.logout();
+
+                Window[] windows = Window.getWindows();
+                for (Window window : windows) {
+                    window.dispose();
+                }
+
+                System.exit(0);
+            }
+        });
         this.getContentPane().setBackground(bg);
         this.setSize(WIDTH, LENGTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

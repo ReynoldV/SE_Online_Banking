@@ -3,6 +3,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class HomePage extends JFrame implements ActionListener
 {
@@ -188,7 +189,21 @@ public class HomePage extends JFrame implements ActionListener
         thanks.setBounds(530, 575, 400, 20);
         this.add(thanks);
 
+        this.addWindowListener(new WindowEventHandler() {
+            @Override
+            public void windowClosing(WindowEvent evt) {
+                //BA.logout (logic.logout) would be called here
+                //Write all changes to the file
+                BA.logout();
 
+                Window[] windows = Window.getWindows();
+                for (Window window : windows) {
+                    window.dispose();
+                }
+
+                System.exit(0);
+            }
+        });
         this.getContentPane().setBackground(bg);
         this.setSize(WIDTH, LENGTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
