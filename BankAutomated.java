@@ -308,8 +308,9 @@ public class BankAutomated
 
         //Generate a random amount between 0 and 10,000 for chequing and savings
         Random rand = new Random();
-        float randCheq = rand.nextFloat()*10000;
-        float randSav = rand.nextFloat()*10000;
+        double randCheq = rand.nextDouble()*10000;
+        double randSav = rand.nextDouble()*10000;
+        System.out.println(randCheq);
 
         // Create and return new CA object
         CA customer = new CA(firstName, lastName, phoneNum, address, gender, dob, email, password, cardNum, cardExpiry,
