@@ -113,11 +113,22 @@ public class HomePage extends JFrame implements ActionListener
         chequingButton.setBackground(Color.white);
         chequingButton.setForeground(Color.black);
         chequingButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        //chequingButton.setHorizontalAlignment(SwingConstants.LEFT);
+        chequingButton.setHorizontalAlignment(SwingConstants.LEFT);
         chequingButton.setBounds(25, 200, 612, 100);
+        chequingButton.addActionListener(this);
         this.add(chequingButton);
 
-        cheqAmountButton = new JButton();
+        cheqAmountButton = new JButton(String.valueOf(cheqAmount));
+        cheqAmountButton.setFont(labels);
+        cheqAmountButton.setBorder(emptyBorder);
+        cheqAmountButton.setFocusPainted(false);
+        cheqAmountButton.setBackground(Color.white);
+        cheqAmountButton.setForeground(Color.black);
+        cheqAmountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        cheqAmountButton.setHorizontalAlignment(SwingConstants.RIGHT);
+        cheqAmountButton.setBounds(612, 200, 613, 100);
+        cheqAmountButton.addActionListener(this);
+        this.add(cheqAmountButton);
 
         this.getContentPane().setBackground(bg);
         this.setSize(WIDTH, LENGTH);

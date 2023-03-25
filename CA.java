@@ -106,8 +106,8 @@ public class CA extends People
         requests.add(request);
     }
     public void print() {
-        System.out.printf("First Name: %-10s Last Name: %-10s | Email: %-25s | Password: %-10s " +
-                "| Address: %-20s | ID: %04d%n", firstName, lastName, email, password, address);
+        System.out.printf("First Name: %-10s Last Name: %-10s | Email: %-25s | Password: %-20s " +
+                " | Address: %-20s\n", firstName, lastName, email, password, address);
     }
     public void printHistory() {
         System.out.printf("%s %s -> ", firstName, lastName);
