@@ -23,6 +23,7 @@ public class HomePage extends JFrame implements ActionListener
     private final JButton savAmountButton;
 
     BankAutomated BA;
+    CA customer;
     LoginPage previous;
 
     public HomePage(LoginPage previous, BankAutomated BA, CA customer)
@@ -34,6 +35,7 @@ public class HomePage extends JFrame implements ActionListener
         savAmount = customer.getSavings();
         this.previous = previous;
         this.BA = BA;
+        this.customer = customer;
 
         Font labels = new Font("Raleway", Font.BOLD, 25);
         Border emptyBorder = BorderFactory.createEmptyBorder();

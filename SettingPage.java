@@ -1,5 +1,12 @@
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SettingPage extends JFrame {
-    
+public class SettingPage extends JFrame implements ActionListener
+{
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+    }
 }
