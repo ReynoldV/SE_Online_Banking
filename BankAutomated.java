@@ -13,7 +13,7 @@ public class BankAutomated
     private final ExecutorService executor = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors());
 
     @SuppressWarnings("SpellCheckingInspection")
-    public enum State {REGISTER, FORGOT, HOME, ACCOUNT, ETRANS, BANKTRANS, FUNDTRANS, MEETREQ, MAKEREP, LOCATE,
+    public enum State {HOME, ACCOUNT, ETRANS, BANKTRANS, FUNDTRANS, MEETREQ, MAKEREP, LOCATE,
                         NOTIF, NOTIFSET, PRIVSET, EDITPROF, SETTINGS}
 
     public BankAutomated() {

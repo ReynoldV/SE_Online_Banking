@@ -9,8 +9,8 @@ public class HomePage extends JFrame implements ActionListener
     static final int WIDTH = 1920;
     static final int LENGTH = 1080;
     private final String custName;
-    private final float cheqAmount;
-    private final float savAmount;
+    private final double cheqAmount;
+    private final double savAmount;
     private final JButton homeButton;
     private final JButton transferButton;
     private final JButton contactUSButton;
@@ -106,27 +106,31 @@ public class HomePage extends JFrame implements ActionListener
         logoutButton.addActionListener(this);
         this.add(logoutButton);
 
-        chequingButton = new JButton("Chequing");
+        chequingButton = new JButton("   Chequing");
         chequingButton.setFont(labels);
         chequingButton.setBorder(emptyBorder);
+        chequingButton.setContentAreaFilled(false);
+        chequingButton.setOpaque(true);
         chequingButton.setFocusPainted(false);
         chequingButton.setBackground(Color.white);
         chequingButton.setForeground(Color.black);
         chequingButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         chequingButton.setHorizontalAlignment(SwingConstants.LEFT);
-        chequingButton.setBounds(25, 200, 612, 100);
+        chequingButton.setBounds(25, 250, 612, 100);
         chequingButton.addActionListener(this);
         this.add(chequingButton);
 
-        cheqAmountButton = new JButton(String.valueOf(cheqAmount));
+        cheqAmountButton = new JButton("$ " + cheqAmount + "   ");
         cheqAmountButton.setFont(labels);
         cheqAmountButton.setBorder(emptyBorder);
+        cheqAmountButton.setContentAreaFilled(false);
+        cheqAmountButton.setOpaque(true);
         cheqAmountButton.setFocusPainted(false);
         cheqAmountButton.setBackground(Color.white);
         cheqAmountButton.setForeground(Color.black);
         cheqAmountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cheqAmountButton.setHorizontalAlignment(SwingConstants.RIGHT);
-        cheqAmountButton.setBounds(612, 200, 613, 100);
+        cheqAmountButton.setBounds(612, 250, 613, 100);
         cheqAmountButton.addActionListener(this);
         this.add(cheqAmountButton);
 
