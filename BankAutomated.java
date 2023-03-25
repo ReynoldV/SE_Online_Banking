@@ -1,8 +1,11 @@
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
-import java.nio.file.Paths;
-import java.util.*;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.concurrent.*;
 
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
@@ -61,6 +64,7 @@ public class BankAutomated
 
         } catch (FileNotFoundException ex) {
             // usually means nothing is inside
+            System.out.println("File is empty");
         } catch (IOException ex) {
             // System.out.println("nothing inside");
             // usually means the file is corrupted or nothing inside
@@ -80,10 +84,11 @@ public class BankAutomated
         try {
 
             // Delete the file
-            Files.deleteIfExists(Paths.get("People.ser"));
+            Path of = Path.of("People.ser");
+            Files.deleteIfExists(of);
     
             // Create a new empty file
-            Files.createFile(Paths.get("People.ser"));
+            Files.createFile(of);
             
             // Print a message
             System.out.println("Cleared People.ser file");
