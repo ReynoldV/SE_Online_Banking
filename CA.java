@@ -11,8 +11,8 @@ public class CA extends People
     String dob;
     String cardExpiry;
     String cvv;
-    float chequing = 0;
-    float savings = 0;
+    float chequing;
+    float savings;
     ArrayList<Transaction> chequingHist;
     ArrayList<Transaction> savingsHist;
     ArrayList<Report> reportSus;
