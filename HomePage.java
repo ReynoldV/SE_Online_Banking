@@ -19,6 +19,8 @@ public class HomePage extends JFrame implements ActionListener
     private final JButton logoutButton;
     private final JButton chequingButton;
     private final JButton cheqAmountButton;
+    private final JButton savingsButton;
+    private final JButton savAmountButton;
 
     BankAutomated BA;
     LoginPage previous;
@@ -115,7 +117,7 @@ public class HomePage extends JFrame implements ActionListener
         accLabel.setFont(new Font("Raleway", Font.BOLD, 30));
         accLabel.setBorder(emptyBorder);
         accLabel.setBackground(bg);
-        accLabel.setBounds(30, 150, 200, 100);
+        accLabel.setBounds(30, 160, 200, 100);
         this.add(accLabel);
 
         chequingButton = new JButton("   Chequing");
@@ -142,9 +144,38 @@ public class HomePage extends JFrame implements ActionListener
         cheqAmountButton.setForeground(Color.black);
         cheqAmountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cheqAmountButton.setHorizontalAlignment(SwingConstants.RIGHT);
+        cheqAmountButton.setVerticalAlignment(SwingConstants.CENTER);
         cheqAmountButton.setBounds(610, 250, 630, 100);
         cheqAmountButton.addActionListener(this);
         this.add(cheqAmountButton);
+
+        savingsButton = new JButton("   Savings");
+        savingsButton.setFont(labels);
+        savingsButton.setBorder(emptyBorder);
+        savingsButton.setContentAreaFilled(false);
+        savingsButton.setOpaque(true);
+        savingsButton.setFocusPainted(false);
+        savingsButton.setBackground(Color.white);
+        savingsButton.setForeground(Color.black);
+        savingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        savingsButton.setHorizontalAlignment(SwingConstants.LEFT);
+        savingsButton.setBounds(25, 350, 612, 200);
+        savingsButton.addActionListener(this);
+        this.add(savingsButton);
+
+        savAmountButton = new JButton("$ " + savAmount + "   ");
+        savAmountButton.setFont(labels);
+        savAmountButton.setBorder(emptyBorder);
+        savAmountButton.setContentAreaFilled(false);
+        savAmountButton.setOpaque(true);
+        savAmountButton.setFocusPainted(false);
+        savAmountButton.setBackground(Color.white);
+        savAmountButton.setForeground(Color.black);
+        savAmountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        savAmountButton.setHorizontalAlignment(SwingConstants.RIGHT);
+        savAmountButton.setBounds(610, 350, 630, 200);
+        savAmountButton.addActionListener(this);
+        this.add(savAmountButton);
 
         this.getContentPane().setBackground(bg);
         this.setSize(WIDTH, LENGTH);
