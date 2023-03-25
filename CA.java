@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.stream.Collectors;
+import java.lang.Math;
 
 // customer account
 public class CA extends People
@@ -130,7 +131,7 @@ public class CA extends People
     }
     public double getChequing()
     {
-        return Math.round(chequing*100.0)/100.0;
+        return chequing;
     }
 
     public void setSaving()
@@ -140,7 +141,7 @@ public class CA extends People
     }
     public double getSavings()
     {
-        return Math.round(chequing*100.0)/100.0;
+        return savings;
     }
 
     // Getter and setter for chequing transaction history
