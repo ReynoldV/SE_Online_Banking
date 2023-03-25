@@ -9,23 +9,28 @@ public class HomePage extends JFrame implements ActionListener
     static final int WIDTH = 1920;
     static final int LENGTH = 1080;
     private final String custName;
+    private final float cheqAmount;
+    private final float savAmount;
     private final JButton homeButton;
     private final JButton transferButton;
     private final JButton contactUSButton;
     private final JButton settingsButton;
     private final JButton findUsButton;
     private final JButton logoutButton;
-
+    private final JButton chequingButton;
+    private final JButton cheqAmountButton;
 
     public HomePage(BankAutomated BA, CA customer)
     {
         this.setTitle("Account Home");
         this.setLayout(null);
         custName = customer.firstName;
+        cheqAmount = customer.getChequing();
+        savAmount = customer.getSavings();
 
         Font labels = new Font("Raleway", Font.BOLD, 25);
         Border emptyBorder = BorderFactory.createEmptyBorder();
-        Color bg = new Color(240, 241, 241);
+        Color bg = new Color(214, 215, 215);
         //Color buttonColor = new Color(55, 110, 170);
         Color buttonColor = Color.BLACK;
 
@@ -101,9 +106,18 @@ public class HomePage extends JFrame implements ActionListener
         logoutButton.addActionListener(this);
         this.add(logoutButton);
 
+        chequingButton = new JButton("Chequing");
+        chequingButton.setFont(labels);
+        chequingButton.setBorder(emptyBorder);
+        chequingButton.setFocusPainted(false);
+        chequingButton.setBackground(Color.white);
+        chequingButton.setForeground(Color.black);
+        chequingButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        //chequingButton.setHorizontalAlignment(SwingConstants.LEFT);
+        chequingButton.setBounds(25, 200, 612, 100);
+        this.add(chequingButton);
 
-        //White rectangle with Chequing/Savings accounts and their funds to the right-hand side. The name of the account
-        //is clickable. Set rectangle as a JButton that doesn't press with setAreaFilled(false) and setOpaque(false)
+        cheqAmountButton = new JButton();
 
         this.getContentPane().setBackground(bg);
         this.setSize(WIDTH, LENGTH);

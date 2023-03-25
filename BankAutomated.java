@@ -2,10 +2,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.*;
 
 @SuppressWarnings("BooleanMethodIsAlwaysInverted")
@@ -309,8 +306,14 @@ public class BankAutomated
             return null;
         }
 
+        //Generate a random amount between 0 and 10,000 for chequing and savings
+        Random rand = new Random();
+        float randCheq = rand.nextFloat()*10000;
+        float randSav = rand.nextFloat()*10000;
+
         // Create and return new CA object
-        CA customer = new CA(firstName, lastName, phoneNum, address, gender, dob, email, password, cardNum, cardExpiry, cvv);
+        CA customer = new CA(firstName, lastName, phoneNum, address, gender, dob, email, password, cardNum, cardExpiry,
+                             cvv, randCheq, randSav);
 
         // Add the new account to the customerAccounts list and customerHash map
         customerAccounts.add(customer);
