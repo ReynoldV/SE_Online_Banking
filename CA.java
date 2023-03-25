@@ -130,7 +130,7 @@ public class CA extends People
     }
     public double getChequing()
     {
-        return chequing;
+        return Math.round(chequing*100.0)/100.0;
     }
 
     public void setSaving()
@@ -140,7 +140,7 @@ public class CA extends People
     }
     public double getSavings()
     {
-        return savings;
+        return Math.round(chequing*100.0)/100.0;
     }
 
     // Getter and setter for chequing transaction history
