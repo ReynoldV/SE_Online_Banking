@@ -127,7 +127,7 @@ public class LoginPage extends JFrame implements ActionListener
         this.setSize(WIDTH, LENGTH);
         this.getContentPane().setBackground(Color.white);
         this.getRootPane().setDefaultButton(loginButton);
-        this.setVisible(true);
+        this.setVisible(false);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
@@ -201,7 +201,7 @@ public class LoginPage extends JFrame implements ActionListener
             {
                 // Debug System.out.println("Success");
                 //Show homepage for the customer
-                HomePage home = new HomePage(logic, customer);
+                HomePage home = new HomePage(this, logic, customer);
                 emailField.setText("");
                 passwordField.setText("");
                 this.setVisible(false);

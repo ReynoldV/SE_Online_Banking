@@ -20,13 +20,18 @@ public class HomePage extends JFrame implements ActionListener
     private final JButton chequingButton;
     private final JButton cheqAmountButton;
 
-    public HomePage(BankAutomated BA, CA customer)
+    BankAutomated BA;
+    LoginPage previous;
+
+    public HomePage(LoginPage previous, BankAutomated BA, CA customer)
     {
         this.setTitle("Account Home");
         this.setLayout(null);
         custName = customer.firstName;
         cheqAmount = customer.getChequing();
         savAmount = customer.getSavings();
+        this.previous = previous;
+        this.BA = BA;
 
         Font labels = new Font("Raleway", Font.BOLD, 25);
         Border emptyBorder = BorderFactory.createEmptyBorder();
@@ -106,6 +111,13 @@ public class HomePage extends JFrame implements ActionListener
         logoutButton.addActionListener(this);
         this.add(logoutButton);
 
+        JLabel accLabel = new JLabel("Accounts:");
+        accLabel.setFont(new Font("Raleway", Font.BOLD, 30));
+        accLabel.setBorder(emptyBorder);
+        accLabel.setBackground(bg);
+        accLabel.setBounds(30, 150, 200, 100);
+        this.add(accLabel);
+
         chequingButton = new JButton("   Chequing");
         chequingButton.setFont(labels);
         chequingButton.setBorder(emptyBorder);
@@ -161,6 +173,10 @@ public class HomePage extends JFrame implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-
+        if (e.getSource() == homeButton)
+        {
+            this.setVisible(false);
+            this.setVisible(true);
+        }
     }
 }
