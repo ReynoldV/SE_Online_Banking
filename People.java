@@ -19,7 +19,19 @@ public class People implements Serializable
         this.email = email;
         this.phoneNum = phoneNum;
     }
+    // Setter for first name
+    public void setFirstName()
+    {
+        this.firstName = firstName;
 
+    }
+    
+    // Setter for first name
+    public void setLastName()
+    {
+        this.lastName =  lastName;
+    }
+    
     // Getter and setter for email
     public String getEmail()
     {

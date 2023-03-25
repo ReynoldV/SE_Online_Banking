@@ -41,7 +41,65 @@ public class CA extends People
     }
 
     // UPDATE ALL SETTERS AND GETTERS TO BE FOR EACH PARAMETER
+    public void setCardexpiry()
+    {
+        this.cardExpiry = cardExpiry;
 
+    }
+
+    public String getCardexpiry()
+    {
+        return cardExpiry;
+    }
+    
+    // Get and Set cvv
+    public void setCvv()
+    {
+        this.cvv = cvv;
+
+    }
+
+    public String getCvv()
+    {
+
+        return cvv;
+    }
+    // Set and get Password
+    public void setPassword()
+    {
+        this.password = password;
+    }
+
+    public String getPassword()
+    {
+        return password;
+
+    }
+    
+    //Set and get Dob
+    public void setDob()
+    {
+        this.dob = dob;
+
+    }
+
+    public String getDob()
+    {
+        return dob;
+
+    }
+    //Get and Set Gender
+    public void setGender()
+    {
+        this.gender = gender;
+
+    }
+
+    public String getGender()
+    {
+        return gender;
+
+    }
     // Setter and getter for address
     public String getAddress()
     {
@@ -53,13 +111,30 @@ public class CA extends People
     }
 
     // Getter for card number, chequing funds, and savings funds
+    public void setCardNum()
+    {
+        this.cardNum = cardNum;
+
+    }
     public String getCardNum()
     {
         return cardNum;
     }
+
+    public void setChequing()
+    {
+        this.chequing = chequing;
+
+    }
     public float getChequing()
     {
         return chequing;
+    }
+
+    public void setSaving()
+    {
+        this.savings = savings;
+
     }
     public float getSavings()
     {
