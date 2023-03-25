@@ -232,7 +232,29 @@ public class HomePage extends JFrame implements ActionListener
         }
         else if(e.getSource() == transferButton)
         {
+
+        }
+        else if(e.getSource() == contactUSButton)
+        {
             
+        }
+        else if (e.getSource() == settingsButton )
+        {
+
+        }
+        else if (e.getSource() == findUsButton)
+        {
+
+        }
+        else if(e.getSource() == savAmountButton || e.getSource() == savingsButton)
+        {
+
+
+        }
+        else if (e.getSource() == chequingButton || e.getSource() == cheqAmountButton)
+        {
+
+
         }
     }
 }
