@@ -249,7 +249,22 @@ public class HomePage extends JFrame implements ActionListener
         }
         else if(e.getSource() == transferButton)
         {
+            String[] options = new String[] {"E-transfer", "Bank Transfer", "Transfer Funds", "Cancel"};
+            int response = JOptionPane.showOptionDialog(this, "Select transfer option:",
+                    "Transfer Option", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,
+                    options[0]);
+            if (response == 0)
+            {
 
+            }
+            else if (response == 1)
+            {
+
+            }
+            else if (response == 2)
+            {
+
+            }
         }
         else if(e.getSource() == contactUSButton)
         {

@@ -45,7 +45,7 @@ public class ETransferPage extends JFrame implements ActionListener
         this.getContentPane().setBackground(bg);
         this.setSize(WIDTH, LENGTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setVisible(true);
+        this.setVisible(false);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
