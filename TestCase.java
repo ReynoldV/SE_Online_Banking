@@ -262,6 +262,258 @@ public class TestCase {
 
         JOptionPane.showMessageDialog(null, "Test cases passed", "testTransferFunds", JOptionPane.INFORMATION_MESSAGE);
     }
+    
+    @Test
+    public void testCardExpiry() {
+
+        BankAutomated BA = new BankAutomated();
+    
+        dummy = BA.createAccount("test", "dummy", "416-792-1234", "test street",
+                "Male", "01/01/1990", "test@gmail.com", "Hello@World1",
+                "4417123456789113", "01/01/2027", "555");
+
+        assert(dummy.getCardExpiry().equals("01/01/2027"));
+
+        dummy.setCardExpiry("01/12/2029");
+
+        assert(dummy.getCardExpiry().equals("01/12/2029"));
+
+        JOptionPane.showMessageDialog(null, "Test cases passed", "testCardExpiry", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Test
+    public void testBankNumber() {
+
+        BankAutomated BA = new BankAutomated();
+    
+        dummy = BA.createAccount("test", "dummy", "416-792-1234", "test street",
+                "Male", "01/01/1990", "test@gmail.com", "Hello@World1",
+                "4417123456789113", "01/01/2027", "555");
+
+        dummy.setBankNumber("123456789");
+
+        assert(dummy.getBankNumber().equals("123456789"));
+
+        dummy.setBankNumber("987654321");
+
+        assert(dummy.getBankNumber().equals("987654321"));
+
+        JOptionPane.showMessageDialog(null, "Test cases passed", "testCardExpiry", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    @Test
+    public void testCVV() {
+
+        BankAutomated BA = new BankAutomated();
+    
+        dummy = BA.createAccount("test", "dummy", "416-792-1234", "test street",
+                "Male", "01/01/1990", "test@gmail.com", "Hello@World1",
+                "4417123456789113", "01/01/2027", "555");
+
+        assert(dummy.getCvv().equals("555"));
+
+        dummy.setCvv("787");
+
+        assert(dummy.getCvv().equals("787"));
+
+        JOptionPane.showMessageDialog(null, "Test cases passed", "testCardExpiry", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    @Test
+    public void testPassword() {
+
+        BankAutomated BA = new BankAutomated();
+    
+        dummy = BA.createAccount("test", "dummy", "416-792-1234", "test street",
+                "Male", "01/01/1990", "test@gmail.com", "Hello@World1",
+                "4417123456789113", "01/01/2027", "555");
+
+        assert(dummy.getPassword().equals("Hello@World1"));
+
+        dummy.setPassword("v3RySaf3paSsW0rd");
+
+        assert(dummy.getPassword().equals("v3RySaf3paSsW0rd"));
+
+        JOptionPane.showMessageDialog(null, "Test cases passed", "testCardExpiry", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    @Test
+    public void testDoB() {
+
+        BankAutomated BA = new BankAutomated();
+    
+        dummy = BA.createAccount("test", "dummy", "416-792-1234", "test street",
+                "Male", "01/01/1990", "test@gmail.com", "Hello@World1",
+                "4417123456789113", "01/01/2027", "555");
+
+        assert(dummy.getDob().equals("01/01/1990"));
+
+        dummy.setDob("09/12/2003");
+
+        assert(dummy.getDob().equals("09/12/2003"));
+
+        JOptionPane.showMessageDialog(null, "Test cases passed", "testCardExpiry", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    @Test
+    public void testGender() {
+
+        BankAutomated BA = new BankAutomated();
+    
+        dummy = BA.createAccount("test", "dummy", "416-792-1234", "test street",
+                "Male", "01/01/1990", "test@gmail.com", "Hello@World1",
+                "4417123456789113", "01/01/2027", "555");
+
+        assert(dummy.getGender().equals("Male"));
+
+        dummy.setGender("Female");
+
+        assert(dummy.getGender().equals("Female"));
+
+        JOptionPane.showMessageDialog(null, "Test cases passed", "testCardExpiry", JOptionPane.INFORMATION_MESSAGE);
+
+
+    }
+
+    @Test
+    public void testAddress() {
+
+        BankAutomated BA = new BankAutomated();
+    
+        dummy = BA.createAccount("test", "dummy", "416-792-1234", "test street",
+                "Male", "01/01/1990", "test@gmail.com", "Hello@World1",
+                "4417123456789113", "01/01/2027", "555");
+
+        assert(dummy.getAddress().equals("test street"));
+
+        dummy.setAddress("5 CS Road");
+
+        assert(dummy.getAddress().equals("5 CS Road"));
+
+        JOptionPane.showMessageDialog(null, "Test cases passed", "testCardExpiry", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    @Test
+    public void testCardNum() {
+
+        BankAutomated BA = new BankAutomated();
+    
+        dummy = BA.createAccount("test", "dummy", "416-792-1234", "test street",
+                "Male", "01/01/1990", "test@gmail.com", "Hello@World1",
+                "4417123456789113", "01/01/2027", "555");
+
+        assert(dummy.getCardNum().equals("4417123456789113"));
+
+        dummy.setCardNum("552823455789113");
+
+        assert(dummy.getCardNum().equals("552823455789113"));
+
+        JOptionPane.showMessageDialog(null, "Test cases passed", "testCardExpiry", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    @Test
+    public void testChequing() {
+
+        BankAutomated BA = new BankAutomated();
+    
+        dummy = BA.createAccount("test", "dummy", "416-792-1234", "test street",
+                "Male", "01/01/1990", "test@gmail.com", "Hello@World1",
+                "4417123456789113", "01/01/2027", "555");
+
+        dummy.setChequing(4545.13);
+
+        assert(dummy.getChequing() == 4545.13);
+
+        dummy.setChequing(5942.84);
+
+        assert(dummy.getChequing() == 5942.84);
+
+        JOptionPane.showMessageDialog(null, "Test cases passed", "testCardExpiry", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    @Test
+    public void testSavings() {
+
+        BankAutomated BA = new BankAutomated();
+    
+        dummy = BA.createAccount("test", "dummy", "416-792-1234", "test street",
+                "Male", "01/01/1990", "test@gmail.com", "Hello@World1",
+                "4417123456789113", "01/01/2027", "555");
+
+        dummy.setSavings(4545.13);
+
+        assert(dummy.getSavings() == 4545.13);
+
+        dummy.setSavings(5942.84);
+
+        assert(dummy.getSavings() == 5942.84);
+
+        JOptionPane.showMessageDialog(null, "Test cases passed", "testCardExpiry", JOptionPane.INFORMATION_MESSAGE);
+
+    }
+
+    @Test
+    public void testChequingHistory() {
+
+        BankAutomated BA = new BankAutomated();
+        ArrayList<Transaction> chequingHist = new ArrayList<Transaction>();
+
+        chequingHist.add(new Transaction("Person 1", "test", 500));
+        chequingHist.add(new Transaction("test", "Person 2", 115));
+        chequingHist.add(new Transaction("Person 3", "test", 200));
+    
+        dummy = BA.createAccount("test", "dummy", "416-792-1234", "test street",
+                "Male", "01/01/1990", "test@gmail.com", "Hello@World1",
+                "4417123456789113", "01/01/2027", "555");
+        
+        dummy.addChequing(new Transaction("Person 1", "test", 500));
+        dummy.addChequing(new Transaction("test", "Person 2", 115));
+        dummy.addChequing(new Transaction("Person 3", "test", 200));
+
+        for (int i = 0; i < chequingHist.size(); i++)
+        {
+            assertEquals(dummy.getChequingHist().get(i).getReceiver(), chequingHist.get(i).getReceiver());
+            assertEquals(dummy.getChequingHist().get(i).getSender(), chequingHist.get(i).getSender());
+            assertEquals(dummy.getChequingHist().get(i).getAmount(), chequingHist.get(i).getAmount());
+        }
+
+        JOptionPane.showMessageDialog(null, "Test cases passed", "testCardExpiry", JOptionPane.INFORMATION_MESSAGE);
+        
+    }
+
+    @Test
+    public void testSavingsHistory() {
+
+        BankAutomated BA = new BankAutomated();
+        ArrayList<Transaction> savingsHist = new ArrayList<Transaction>();
+
+        savingsHist.add(new Transaction("Person 1", "test", 500));
+        savingsHist.add(new Transaction("test", "Person 2", 115));
+        savingsHist.add(new Transaction("Person 3", "test", 200));
+    
+        dummy = BA.createAccount("test", "dummy", "416-792-1234", "test street",
+                "Male", "01/01/1990", "test@gmail.com", "Hello@World1",
+                "4417123456789113", "01/01/2027", "555");
+        
+        dummy.addSaving(new Transaction("Person 1", "test", 500));
+        dummy.addSaving(new Transaction("test", "Person 2", 115));
+        dummy.addSaving(new Transaction("Person 3", "test", 200));
+
+        for (int i = 0; i < savingsHist.size(); i++)
+        {
+            assertEquals(dummy.getSavingsHist().get(i).getReceiver(), savingsHist.get(i).getReceiver());
+            assertEquals(dummy.getSavingsHist().get(i).getSender(), savingsHist.get(i).getSender());
+            assertEquals(dummy.getSavingsHist().get(i).getAmount(), savingsHist.get(i).getAmount());
+        }
+
+        JOptionPane.showMessageDialog(null, "Test cases passed", "testCardExpiry", JOptionPane.INFORMATION_MESSAGE);
+    }
     // Future test cases for test and integration phase
         
 }
