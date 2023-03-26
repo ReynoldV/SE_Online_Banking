@@ -10,8 +10,6 @@ public class HomePage extends JFrame implements ActionListener
     static final int WIDTH = 1920;
     static final int LENGTH = 1080;
     private final String custName;
-    private final double cheqAmount;
-    private final double savAmount;
     private final JButton homeButton;
     private final JButton transferButton;
     private final JButton contactUSButton;
@@ -33,8 +31,8 @@ public class HomePage extends JFrame implements ActionListener
         this.setTitle("Account Home");
         this.setLayout(null);
         custName = customer.firstName;
-        cheqAmount = customer.getChequing();
-        savAmount = customer.getSavings();
+        double cheqAmount = customer.getChequing();
+        double savAmount = customer.getSavings();
 
        
         this.previous = previous;
