@@ -3,6 +3,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 public class HomePage extends JFrame implements ActionListener
 {
@@ -23,6 +24,7 @@ public class HomePage extends JFrame implements ActionListener
     private final JButton savAmountButton;
 
     BankAutomated BA;
+    CA customer;
     LoginPage previous;
     
 
@@ -37,10 +39,11 @@ public class HomePage extends JFrame implements ActionListener
        
         this.previous = previous;
         this.BA = BA;
-        
+        this.customer = customer;
 
         Font labels = new Font("Raleway", Font.BOLD, 25);
         Border emptyBorder = BorderFactory.createEmptyBorder();
+        Border topBorder = BorderFactory.createMatteBorder(1,0,0,0,Color.GRAY);
         Color bg = new Color(214, 215, 215);
         //Color buttonColor = new Color(55, 110, 170);
         Color buttonColor = Color.BLACK;
@@ -134,7 +137,7 @@ public class HomePage extends JFrame implements ActionListener
         chequingButton.setForeground(Color.black);
         chequingButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         chequingButton.setHorizontalAlignment(SwingConstants.LEFT);
-        chequingButton.setBounds(25, 250, 612, 100);
+        chequingButton.setBounds(25, 250, 612, 150);
         chequingButton.addActionListener(this);
         this.add(chequingButton);
 
@@ -149,13 +152,13 @@ public class HomePage extends JFrame implements ActionListener
         cheqAmountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         cheqAmountButton.setHorizontalAlignment(SwingConstants.RIGHT);
         cheqAmountButton.setVerticalAlignment(SwingConstants.CENTER);
-        cheqAmountButton.setBounds(610, 250, 630, 100);
+        cheqAmountButton.setBounds(610, 250, 630, 150);
         cheqAmountButton.addActionListener(this);
         this.add(cheqAmountButton);
 
         savingsButton = new JButton("   Savings");
         savingsButton.setFont(labels);
-        savingsButton.setBorder(emptyBorder);
+        savingsButton.setBorder(topBorder);
         savingsButton.setContentAreaFilled(false);
         savingsButton.setOpaque(true);
         savingsButton.setFocusPainted(false);
@@ -163,13 +166,13 @@ public class HomePage extends JFrame implements ActionListener
         savingsButton.setForeground(Color.black);
         savingsButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         savingsButton.setHorizontalAlignment(SwingConstants.LEFT);
-        savingsButton.setBounds(25, 350, 612, 200);
+        savingsButton.setBounds(25, 400, 612, 150);
         savingsButton.addActionListener(this);
         this.add(savingsButton);
 
         savAmountButton = new JButton("$ " + savAmount + "   ");
         savAmountButton.setFont(labels);
-        savAmountButton.setBorder(emptyBorder);
+        savAmountButton.setBorder(topBorder);
         savAmountButton.setContentAreaFilled(false);
         savAmountButton.setOpaque(true);
         savAmountButton.setFocusPainted(false);
@@ -177,10 +180,33 @@ public class HomePage extends JFrame implements ActionListener
         savAmountButton.setForeground(Color.black);
         savAmountButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         savAmountButton.setHorizontalAlignment(SwingConstants.RIGHT);
-        savAmountButton.setBounds(610, 350, 630, 200);
+        savAmountButton.setBounds(610, 400, 630, 150);
         savAmountButton.addActionListener(this);
         this.add(savAmountButton);
 
+        JLabel thanks = new JLabel("Thank you for using BCS.");
+        thanks.setBackground(Color.white);
+        accLabel.setBorder(emptyBorder);
+        thanks.setForeground(new Color(96, 96, 96));
+        thanks.setFont(new Font("Arial", Font.PLAIN, 15));
+        thanks.setBounds(530, 575, 400, 20);
+        this.add(thanks);
+
+        this.addWindowListener(new WindowEventHandler() {
+            @Override
+            public void windowClosing(WindowEvent evt) {
+                //BA.logout (logic.logout) would be called here
+                //Write all changes to the file
+                BA.logout();
+
+                Window[] windows = Window.getWindows();
+                for (Window window : windows) {
+                    window.dispose();
+                }
+
+                System.exit(0);
+            }
+        });
         this.getContentPane().setBackground(bg);
         this.setSize(WIDTH, LENGTH);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -215,10 +241,35 @@ public class HomePage extends JFrame implements ActionListener
         }
         else if (e.getSource() == logoutButton)
         {
-            this.setVisible(false);
-            previous.setVisible(true);
+            int result = JOptionPane.showConfirmDialog(this,
+                    "You will now be redirected to the login page.", "Logout?",
+                    JOptionPane.OK_CANCEL_OPTION);
+            if (result == JOptionPane.OK_OPTION)
+            {
+                this.setVisible(false);
+                previous.setVisible(true);
+            }
         }
         else if(e.getSource() == transferButton)
+        {
+            String[] options = new String[] {"E-transfer", "Bank Transfer", "Transfer Funds", "Cancel"};
+            int response = JOptionPane.showOptionDialog(this, "Select transfer option:",
+                    "Transfer Option", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,
+                    options[0]);
+            if (response == 0)
+            {
+
+            }
+            else if (response == 1)
+            {
+
+            }
+            else if (response == 2)
+            {
+
+            }
+        }
+        else if(e.getSource() == contactUSButton)
         {
             
         }
@@ -227,6 +278,23 @@ public class HomePage extends JFrame implements ActionListener
             FindUsPage fuss = new FindUsPage(BA, this);
             this.setVisible(false);
             fuss.setVisible(true);
+        }
+        else if (e.getSource() == settingsButton )
+        {
+
+        }
+        else if (e.getSource() == findUsButton)
+        {
+
+        }
+        else if(e.getSource() == savAmountButton || e.getSource() == savingsButton)
+        {
+
+
+        }
+        else if (e.getSource() == chequingButton || e.getSource() == cheqAmountButton)
+        {
+
         }
     }
 }

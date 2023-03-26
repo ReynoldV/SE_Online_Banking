@@ -313,7 +313,6 @@ public class BankAutomated
         Random rand = new Random();
         double randCheq = rand.nextDouble()*10000;
         double randSav = rand.nextDouble()*10000;
-        System.out.println(randCheq);
 
         // Create and return new CA object
         CA customer = new CA(firstName, lastName, phoneNum, address, gender, dob, email, password, cardNum, cardExpiry,

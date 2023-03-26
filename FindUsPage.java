@@ -106,6 +106,5 @@ public class FindUsPage extends JFrame implements ActionListener {
             this.setVisible(false);
             previous.setVisible(true);
         }
-        }
     }
-
+}
