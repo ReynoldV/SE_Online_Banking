@@ -3,7 +3,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Objects;
-
+import java.util.*;
 
 public class FindUsPage extends JFrame implements ActionListener, MouseListener
 {
@@ -16,12 +16,15 @@ public class FindUsPage extends JFrame implements ActionListener, MouseListener
     private final JLabel locImage3;
     BankAutomated BA;
     HomePage previous; 
+    ArrayList<String> strts;
     public FindUsPage(BankAutomated BA, HomePage previous)
     {   
         this.setTitle("Our Locations");
         this.setLayout(null);
+
         this.BA = BA;
         this.previous = previous;
+        this.strts = BA.addresses()
         Color bg = new Color(214, 215, 215);
         Border border = BorderFactory.createEmptyBorder();
 
@@ -44,7 +47,16 @@ public class FindUsPage extends JFrame implements ActionListener, MouseListener
         backToHome.setBorder(border);
         backToHome.setContentAreaFilled(false);
         backToHome.addActionListener(this);
-        this.add(backToHome);
+        this.add(backToHome); 
+
+        for (int i = 0; i < strts.size(); i ++)
+        {
+            JLabel street = new JLabel(strts.get(i)); 
+            street.setForeground(Color.yellow);
+            street.setFont(new Font("SansSerif", Font.PLAIN, (200/strts.size())));
+            street.setBounds(700, 115 + (150 * i), 600, 200);
+            this.add(street);
+        }
 
         ImageIcon pin = new ImageIcon(Objects.requireNonNull(getClass().getResource("mapPin.png")));
         locImage = new JLabel(pin);
@@ -91,6 +103,7 @@ public class FindUsPage extends JFrame implements ActionListener, MouseListener
     }
     public void paint(Graphics g)
     {
+        
         super.paint(g);
 
         Graphics2D g2 = (Graphics2D) g;

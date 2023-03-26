@@ -368,7 +368,19 @@ public class BankAutomated
     {
 
     }
+    //returns all the required addresses for findUs
+    public ArrayList<String> addresses()
+    {
+        ArrayList<String> lst = new ArrayList<String>();
 
+
+        lst.add("1955 Chandler Road");
+        lst.add("21 Lovecraft Lane");
+        lst.add("1963 Bradbury St");
+        lst.add("1965 Herbert Blrvd");
+
+        return lst; 
+    }
     public void logout()
     {
 
