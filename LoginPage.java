@@ -195,7 +195,7 @@ public class LoginPage extends JFrame implements ActionListener
             }
 
             customer = logic.loginAccount(email, password);
-
+            
             // Do other thing
             if (customer != null)
             {

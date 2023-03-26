@@ -24,6 +24,7 @@ public class HomePage extends JFrame implements ActionListener
 
     BankAutomated BA;
     LoginPage previous;
+    
 
     public HomePage(LoginPage previous, BankAutomated BA, CA customer)
     {
@@ -32,8 +33,11 @@ public class HomePage extends JFrame implements ActionListener
         custName = customer.firstName;
         cheqAmount = customer.getChequing();
         savAmount = customer.getSavings();
+
+       
         this.previous = previous;
         this.BA = BA;
+        
 
         Font labels = new Font("Raleway", Font.BOLD, 25);
         Border emptyBorder = BorderFactory.createEmptyBorder();
@@ -217,6 +221,12 @@ public class HomePage extends JFrame implements ActionListener
         else if(e.getSource() == transferButton)
         {
             
+        }
+        else if(e.getSource() ==findUsButton)
+        {
+            FindUsPage fuss = new FindUsPage(BA, this);
+            this.setVisible(false);
+            fuss.setVisible(true);
         }
     }
 }
