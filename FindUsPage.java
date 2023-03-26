@@ -8,7 +8,7 @@ import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Objects;
-
+import java.util.*;
 
 public class FindUsPage extends JFrame implements ActionListener {
     static final int WIDTH = 1920;
@@ -16,13 +16,14 @@ public class FindUsPage extends JFrame implements ActionListener {
     private final JButton backToHome;
     BankAutomated Ba; 
     HomePage previous; 
+    ArrayList<String> strts;
     public FindUsPage(BankAutomated BA, HomePage previous)
     {   
         this.setTitle("Our Locations");
         this.setLayout(null);
         this.Ba = BA; 
         this.previous = previous; 
-
+        this.strts = Ba.addresses(); 
 
 
 
@@ -37,6 +38,16 @@ public class FindUsPage extends JFrame implements ActionListener {
         backToHome.addActionListener(this);
         this.add(backToHome); 
         
+
+        for (int i = 0; i < strts.size(); i ++){
+            JLabel street = new JLabel(strts.get(i)); 
+            street.setForeground(Color.yellow);
+            street.setFont(new Font("SansSerif", Font.PLAIN, (200/strts.size())));
+            street.setBounds(700, 115 + (150 * i), 600, 200);
+            this.add(street);
+        }
+
+
         this.addWindowListener(new WindowEventHandler() {
             @Override
             public void windowClosing(WindowEvent evt) {
@@ -62,6 +73,7 @@ public class FindUsPage extends JFrame implements ActionListener {
     }
     public void paint(Graphics g)
     {
+        
         super.paint(g);
         
 
