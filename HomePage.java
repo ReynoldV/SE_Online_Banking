@@ -45,7 +45,6 @@ public class HomePage extends JFrame implements ActionListener
         Border emptyBorder = BorderFactory.createEmptyBorder();
         Border topBorder = BorderFactory.createMatteBorder(1,0,0,0,Color.GRAY);
         Color bg = new Color(214, 215, 215);
-        //Color buttonColor = new Color(55, 110, 170);
         Color buttonColor = Color.BLACK;
 
         homeButton = new JButton("Home");
