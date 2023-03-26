@@ -16,7 +16,8 @@ public class FindUsPage extends JFrame implements ActionListener, MouseListener
     private final JLabel locImage3;
     BankAutomated BA;
     HomePage previous; 
-    ArrayList<String> strts;
+    ArrayList<String> streets;
+
     public FindUsPage(BankAutomated BA, HomePage previous)
     {   
         this.setTitle("Our Locations");
@@ -24,7 +25,7 @@ public class FindUsPage extends JFrame implements ActionListener, MouseListener
 
         this.BA = BA;
         this.previous = previous;
-        this.strts = BA.addresses()
+        this.streets = BA.addresses();
         Color bg = new Color(214, 215, 215);
         Border border = BorderFactory.createEmptyBorder();
 
@@ -49,11 +50,11 @@ public class FindUsPage extends JFrame implements ActionListener, MouseListener
         backToHome.addActionListener(this);
         this.add(backToHome); 
 
-        for (int i = 0; i < strts.size(); i ++)
+        for (int i = 0; i < streets.size(); i ++)
         {
-            JLabel street = new JLabel(strts.get(i)); 
+            JLabel street = new JLabel(streets.get(i));
             street.setForeground(Color.yellow);
-            street.setFont(new Font("SansSerif", Font.PLAIN, (200/strts.size())));
+            street.setFont(new Font("SansSerif", Font.PLAIN, (200/streets.size())));
             street.setBounds(700, 115 + (150 * i), 600, 200);
             this.add(street);
         }
