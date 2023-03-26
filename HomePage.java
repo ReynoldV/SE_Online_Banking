@@ -10,8 +10,6 @@ public class HomePage extends JFrame implements ActionListener
     static final int WIDTH = 1920;
     static final int LENGTH = 1080;
     private final String custName;
-    private final double cheqAmount;
-    private final double savAmount;
     private final JButton homeButton;
     private final JButton transferButton;
     private final JButton contactUSButton;
@@ -33,8 +31,8 @@ public class HomePage extends JFrame implements ActionListener
         this.setTitle("Account Home");
         this.setLayout(null);
         custName = customer.firstName;
-        cheqAmount = customer.getChequing();
-        savAmount = customer.getSavings();
+        double cheqAmount = customer.getChequing();
+        double savAmount = customer.getSavings();
 
        
         this.previous = previous;
@@ -45,7 +43,6 @@ public class HomePage extends JFrame implements ActionListener
         Border emptyBorder = BorderFactory.createEmptyBorder();
         Border topBorder = BorderFactory.createMatteBorder(1,0,0,0,Color.GRAY);
         Color bg = new Color(214, 215, 215);
-        //Color buttonColor = new Color(55, 110, 170);
         Color buttonColor = Color.BLACK;
 
         homeButton = new JButton("Home");
@@ -258,20 +255,44 @@ public class HomePage extends JFrame implements ActionListener
                     options[0]);
             if (response == 0)
             {
-
+                
+                this.setVisible(false);
+                ETransferPage etranPage = new ETransferPage(BA, this, customer);
+                etranPage.setVisible(true);
             }
             else if (response == 1)
             {
-
+                
+                this.setVisible(false);
+                TransferFundsPage FundtranPage = new TransferFundsPage(BA,this, customer);
+                FundtranPage.setVisible(true);
             }
             else if (response == 2)
             {
-
+                this.setVisible(false);
+                NotificationSettingPage notifPage = new NotificationSettingPage(this, customer);
+                notifPage.setVisible(true);
             }
         }
         else if(e.getSource() == contactUSButton)
         {
             
+            String[] options = new String[] {"Request a Meeting", "Make a Report", "Cancel"};
+            int response = JOptionPane.showOptionDialog(this, "Select contact option:",
+                    "Ways to Contact", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,
+                    options[0]);
+            if (response == 0)
+            {
+                this.setVisible(false);
+                RequestMeetingPage requestPage = new RequestMeetingPage(BA,this, customer);
+                requestPage.setVisible(true);
+            }
+            else if (response == 1)
+            {
+                this.setVisible(false);
+                MakeReportPage reportPage = new MakeReportPage(BA,this, customer);
+                reportPage.setVisible(true);
+            }
         }
         else if(e.getSource() ==findUsButton)
         {
@@ -281,11 +302,29 @@ public class HomePage extends JFrame implements ActionListener
         }
         else if (e.getSource() == settingsButton )
         {
-
-        }
-        else if (e.getSource() == findUsButton)
-        {
-
+            
+            String[] options = new String[] {"Notification Settings", "Profile Settings", "Privacy Settings", "Cancel"};
+            int response = JOptionPane.showOptionDialog(this, "Select an option:",
+                    "Setting Options", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options,
+                    options[0]);
+            if (response == 0)
+            {
+                this.setVisible(false);
+                NotificationSettingPage notifPage = new NotificationSettingPage(this, customer);
+                notifPage.setVisible(true);
+            }
+            else if (response == 1)
+            {
+                this.setVisible(false);
+                ProfileSettingPage profPage = new ProfileSettingPage(this, customer);
+                profPage.setVisible(true);
+            }
+            else if (response == 2)
+            {
+                this.setVisible(false);
+                PrivacySettingPage privPage = new PrivacySettingPage(this, customer);
+                privPage.setVisible(true);
+            }
         }
         else if(e.getSource() == savAmountButton || e.getSource() == savingsButton)
         {

@@ -444,7 +444,21 @@ public class BankAutomated
     {
 
     }
+    //returns all the required addresses for findUs
+    public ArrayList<String> addresses()
+    {
+        ArrayList<String> lst = new ArrayList<String>();
 
+
+        lst.add("10153 King George Blvd, Vancouver, BC");
+        lst.add("255 Yonge Street, Toronto, ON");
+        lst.add("2210 Bank Street, Ottawa, ON");
+        lst.add("1955 Chandler Road, New York City, NY");
+        lst.add("21 Lovecraft Lane, Montreal, QC");
+        lst.add("1965 Herbert Blvd, Halifax, NS");
+
+        return lst; 
+    }
     public void logout()
     {
 
