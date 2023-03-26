@@ -374,10 +374,12 @@ public class BankAutomated
         ArrayList<String> lst = new ArrayList<String>();
 
 
-        lst.add("1955 Chandler Road");
-        lst.add("21 Lovecraft Lane");
-        lst.add("1963 Bradbury St");
-        lst.add("1965 Herbert Blrvd");
+        lst.add("10153 King George Blvd, Vancouver, BC");
+        lst.add("255 Yonge Street, Toronto, ON");
+        lst.add("2210 Bank Street, Ottawa, ON");
+        lst.add("1955 Chandler Road, New York City, NY");
+        lst.add("21 Lovecraft Lane, Montreal, QC");
+        lst.add("1965 Herbert Blvd, Halifax, NS");
 
         return lst; 
     }

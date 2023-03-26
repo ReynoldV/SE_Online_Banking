@@ -10,10 +10,12 @@ public class FindUsPage extends JFrame implements ActionListener, MouseListener
     static final int WIDTH = 1920;
     static final int LENGTH = 1080;
     private final JButton backToHome;
-    private JButton locationButton;
     private final JLabel locImage;
     private final JLabel locImage2;
     private final JLabel locImage3;
+    private final JLabel locImage4;
+    private final JLabel locImage5;
+    private final JLabel locImage6;
     BankAutomated BA;
     HomePage previous; 
     ArrayList<String> streets;
@@ -48,16 +50,7 @@ public class FindUsPage extends JFrame implements ActionListener, MouseListener
         backToHome.setBorder(border);
         backToHome.setContentAreaFilled(false);
         backToHome.addActionListener(this);
-        this.add(backToHome); 
-
-        for (int i = 0; i < streets.size(); i ++)
-        {
-            JLabel street = new JLabel(streets.get(i));
-            street.setForeground(Color.yellow);
-            street.setFont(new Font("SansSerif", Font.PLAIN, (200/streets.size())));
-            street.setBounds(700, 115 + (150 * i), 600, 200);
-            this.add(street);
-        }
+        this.add(backToHome);
 
         ImageIcon pin = new ImageIcon(Objects.requireNonNull(getClass().getResource("mapPin.png")));
         locImage = new JLabel(pin);
@@ -76,10 +69,31 @@ public class FindUsPage extends JFrame implements ActionListener, MouseListener
 
         locImage3 = new JLabel(pin);
         locImage3.setBorder(border);
-        locImage3.setBounds(900,300,64,64);
+        locImage3.setBounds(750,350,64,64);
         locImage3.setCursor(new Cursor(Cursor.HAND_CURSOR));
         locImage3.addMouseListener(this);
         this.add(locImage3);
+
+        locImage4 = new JLabel(pin);
+        locImage4.setBorder(border);
+        locImage4.setBounds(800,500,64,64);
+        locImage4.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        locImage4.addMouseListener(this);
+        this.add(locImage4);
+
+        locImage5 = new JLabel(pin);
+        locImage5.setBorder(border);
+        locImage5.setBounds(850,250,64,64);
+        locImage5.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        locImage5.addMouseListener(this);
+        this.add(locImage5);
+
+        locImage6 = new JLabel(pin);
+        locImage6.setBorder(border);
+        locImage6.setBounds(1200,220,64,64);
+        locImage6.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        locImage6.addMouseListener(this);
+        this.add(locImage6);
 
         this.addWindowListener(new WindowEventHandler() {
             @Override
@@ -134,15 +148,27 @@ public class FindUsPage extends JFrame implements ActionListener, MouseListener
     {
         if (e.getSource()==locImage)
         {
-            JOptionPane.showMessageDialog(this, "The location you selected in 10153 King George Blvd, Vancouver, BC.");
+            JOptionPane.showMessageDialog(this, "The location you selected is " + streets.get(0));
         }
         else if (e.getSource()==locImage2)
         {
-            JOptionPane.showMessageDialog(this, "The location you selected in 255 Yonge Street, Toronto, ON.");
+            JOptionPane.showMessageDialog(this, "The location you selected is " + streets.get(1));
         }
         else if (e.getSource()==locImage3)
         {
-            JOptionPane.showMessageDialog(this, "The location you selected in 2210 Bank Street, Ottawa, ON.");
+            JOptionPane.showMessageDialog(this, "The location you selected is " + streets.get(2));
+        }
+        else if (e.getSource()==locImage4)
+        {
+            JOptionPane.showMessageDialog(this, "The location you selected is " + streets.get(3));
+        }
+        else if (e.getSource()==locImage5)
+        {
+            JOptionPane.showMessageDialog(this, "The location you selected is " + streets.get(4));
+        }
+        else if (e.getSource()==locImage6)
+        {
+            JOptionPane.showMessageDialog(this, "The location you selected is " + streets.get(5));
         }
     }
 
