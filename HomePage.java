@@ -26,6 +26,7 @@ public class HomePage extends JFrame implements ActionListener
     BankAutomated BA;
     CA customer;
     LoginPage previous;
+    
 
     public HomePage(LoginPage previous, BankAutomated BA, CA customer)
     {
@@ -34,6 +35,8 @@ public class HomePage extends JFrame implements ActionListener
         custName = customer.firstName;
         cheqAmount = customer.getChequing();
         savAmount = customer.getSavings();
+
+       
         this.previous = previous;
         this.BA = BA;
         this.customer = customer;
@@ -270,6 +273,12 @@ public class HomePage extends JFrame implements ActionListener
         {
             
         }
+        else if(e.getSource() ==findUsButton)
+        {
+            FindUsPage fuss = new FindUsPage(BA, this);
+            this.setVisible(false);
+            fuss.setVisible(true);
+        }
         else if (e.getSource() == settingsButton )
         {
 
@@ -285,7 +294,6 @@ public class HomePage extends JFrame implements ActionListener
         }
         else if (e.getSource() == chequingButton || e.getSource() == cheqAmountButton)
         {
-
 
         }
     }

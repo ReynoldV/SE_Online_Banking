@@ -1,32 +1,42 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Objects;
 
-public class FindUsPage extends JFrame implements ActionListener
-{
+
+public class FindUsPage extends JFrame implements ActionListener {
     static final int WIDTH = 1920;
     static final int LENGTH = 1080;
-
-    BankAutomated BA;
-    HomePage home;
-    CA customer;
-    public FindUsPage(HomePage home, CA customer)
-    {
-        this.setTitle("Account Home");
+    private final JButton backToHome;
+    BankAutomated Ba; 
+    HomePage previous; 
+    public FindUsPage(BankAutomated BA, HomePage previous)
+    {   
+        this.setTitle("Our Locations");
         this.setLayout(null);
-        this.home = home;
-        this.customer = customer;
-        this.BA = BA;
+        this.Ba = BA; 
+        this.previous = previous; 
 
-        Font labels = new Font("Raleway", Font.BOLD, 25);
-        Border emptyBorder = BorderFactory.createEmptyBorder();
-        Border topBorder = BorderFactory.createMatteBorder(1,0,0,0,Color.GRAY);
-        Color bg = new Color(214, 215, 215);
-        Color buttonColor = Color.BLACK;
 
+
+
+        Border border = BorderFactory.createLineBorder(Color.BLACK, 2);
+        backToHome = new JButton("Back to Home");
+        backToHome.setFont(new Font("SansSerif", Font.PLAIN, 20));
+        backToHome.setBounds(910, 900, 350, 50);
+        backToHome.setBackground(Color.blue);
+        backToHome.setForeground(Color.white);
+        backToHome.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        backToHome.setBorder(border); 
+        backToHome.addActionListener(this);
+        this.add(backToHome); 
+        
         this.addWindowListener(new WindowEventHandler() {
             @Override
             public void windowClosing(WindowEvent evt) {
@@ -42,16 +52,18 @@ public class FindUsPage extends JFrame implements ActionListener
                 System.exit(0);
             }
         });
-        this.getContentPane().setBackground(bg);
+        this.getContentPane().setBackground(Color.DARK_GRAY);
+        this.getRootPane().setDefaultButton(backToHome);
         this.setSize(WIDTH, LENGTH);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setVisible(false);
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-    }
 
+
+    }
     public void paint(Graphics g)
     {
         super.paint(g);
+        
 
         Graphics2D g2 = (Graphics2D) g;
         Color myRed = new Color(230, 30, 30);
@@ -63,11 +75,24 @@ public class FindUsPage extends JFrame implements ActionListener
         Font regFont = new Font("Raleway", Font.BOLD, 60);
         g2.setFont(regFont);
         g2.setColor(new Color(250, 185, 60));
-        g2.drawString("Find Us", 25, 110);
+        g2.drawString("Our Current Locations ", 25, 110);
+        try
+        {
+            BufferedImage image = ImageIO.read(Objects.requireNonNull(getClass().getResource("map.png")));
+            g.drawImage(image, 1500, 200, 256,256, this);
+        }
+        catch (IOException e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
-
     @Override
-    public void actionPerformed(ActionEvent e) {
-
+    public void actionPerformed(ActionEvent e)
+    {
+        if (e.getSource() == backToHome)
+        {
+            this.setVisible(false);
+            previous.setVisible(true);
+        }
     }
 }
