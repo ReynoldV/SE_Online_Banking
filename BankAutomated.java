@@ -1,3 +1,5 @@
+import static org.junit.Assume.assumeNotNull;
+
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.NoSuchFileException;
@@ -309,14 +311,15 @@ public class BankAutomated
             return null;
         }
 
-        //Generate a random amount between 0 and 10,000 for chequing and savings
+        //Generate a random amount between 0 and 10,000 for chequing, savings, and bankNumber
         Random rand = new Random();
         double randCheq = rand.nextDouble()*10000;
         double randSav = rand.nextDouble()*10000;
+        String bankNum = String.valueOf(rand.nextInt(10000));
 
         // Create and return new CA object
         CA customer = new CA(firstName, lastName, phoneNum, address, gender, dob, email, password, cardNum, cardExpiry,
-                             cvv, randCheq, randSav);
+                             cvv, randCheq, randSav, bankNum);
 
         // Add the new account to the customerAccounts list and customerHash map
         customerAccounts.add(customer);
@@ -344,21 +347,94 @@ public class BankAutomated
     }
 
     // Allow users to transfer between chequing and savings accounts
-    public void transferFunds(int transferAmount, String fromAccount, String toAccount)
+    // ERROR CODES: returns 0 if successful, 1 if insufficient funds
+    public int transferFunds(double transferAmount, String fromAccount, CA customer)
     {
-
+        if (fromAccount.equals("Chequing"))
+        {
+            if (transferAmount > customer.getChequing())
+            {
+                return 1;
+            }
+            customer.setChequing(customer.getChequing() - transferAmount);
+            customer.setSavings(customer.getSavings() + transferAmount);
+            return 0;
+        }
+        else
+        {
+            if (transferAmount > customer.getSavings())
+            {
+                return 1;
+            }
+            customer.setChequing(customer.getChequing() + transferAmount);
+            customer.setSavings(customer.getSavings() - transferAmount);
+            return 0;
+        }
     }
 
     // Allow users to etransfer from their account to another user with using the receiver's email
-    public void etransfer(int amount, String receiverEmail)
+    // ERROR CODES: returns 0 if successful, returns 1 if email is not valid, returns 2 if 
+    // customer has insufficient funds, returns 3 if recieverEmail is not found
+    public int etransfer(double amount, String receiverEmail, CA customer)
     {
+        if (!validEmail(receiverEmail))
+        {
+            return 1;
+        }
+        else if (amount > customer.getChequing())
+        {
+            return 2;
+        }
+        CA receiver = customerHash.get(receiverEmail);
 
+        if (receiver == null)
+        {
+            return 3;
+        }
+
+        receiver.setChequing(receiver.getChequing() + amount);
+        customer.setChequing(customer.getChequing() - amount);
+        return 0;
     }
 
     // Allow users to make a bank transfer from their account to another user using the receiver's
     // bank account number
-    public void bankTransfer(int amount, String receiverAcc)
+    // ERROR CODES: returns 0 if successful, returns 1 if bank number is not 5 digits,
+    // returns 2 if chequing balance is too low for transfer amount, 
+    // returns 3 if no valid receiver account is found with bankNumber receiverAcc
+    public int bankTransfer(int amount, String receiverAcc, CA customer)
     {
+        if (receiverAcc.length() != 5)
+        {
+            return 1;
+        }
+        if (amount > customer.getChequing())
+        {
+            return 2;
+        }
+
+        CA receiver = null;
+        // Loop through the accounts in the hashmap to find matching
+        for (CA account : customerHash.values())
+        {
+            if (account.getBankNumber() == receiverAcc)
+            {
+                receiver = account;
+                break;
+            }
+        }
+
+        if (receiver != null)
+        {
+            receiver.setChequing(receiver.getChequing() + amount);
+            customer.setChequing(customer.getChequing() - amount);
+            return 0;
+        }
+        else 
+        {
+            return 3;
+        }
+
 
     }
 

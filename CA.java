@@ -12,6 +12,7 @@ public class CA extends People
     String dob;
     String cardExpiry;
     String cvv;
+    String bankNumber; // For bank transfers
     double chequing;
     double savings;
     ArrayList<Transaction> chequingHist;
@@ -24,7 +25,7 @@ public class CA extends People
 
     public CA(String firstName, String lastName, String phoneNum, String address, String gender, String dob,
               String email, String password, String cardNum, String cardExpiry, String cvv, double chequing,
-              double savings)
+              double savings, String bankNumber)
     {
         super(firstName, lastName, email, phoneNum);
         this.address = address;
@@ -43,8 +44,17 @@ public class CA extends People
         requests = new ArrayList<Request>();
     }
 
+    public void setBankNumber(String num)
+    {
+        this.bankNumber = num;
+    }
+
+    public String getBankNumber()
+    {
+        return bankNumber;
+    }
     // UPDATE ALL SETTERS AND GETTERS TO BE FOR EACH PARAMETER
-    public void setCardExpiry()
+    public void setCardExpiry(String cardExpiry)
     {
         this.cardExpiry = cardExpiry;
 
@@ -56,7 +66,7 @@ public class CA extends People
     }
     
     // Get and Set cvv
-    public void setCvv()
+    public void setCvv(String cvv)
     {
         this.cvv = cvv;
 
@@ -68,7 +78,7 @@ public class CA extends People
         return cvv;
     }
     // Set and get Password
-    public void setPassword()
+    public void setPassword(String password)
     {
         this.password = password;
     }
@@ -80,7 +90,7 @@ public class CA extends People
     }
     
     //Set and get Dob
-    public void setDob()
+    public void setDob(String dob)
     {
         this.dob = dob;
 
@@ -92,7 +102,7 @@ public class CA extends People
 
     }
     //Get and Set Gender
-    public void setGender()
+    public void setGender(String gender)
     {
         this.gender = gender;
 
@@ -114,7 +124,7 @@ public class CA extends People
     }
 
     // Getter for card number, chequing funds, and savings funds
-    public void setCardNum()
+    public void setCardNum(String cardNum)
     {
         this.cardNum = cardNum;
 
@@ -124,9 +134,9 @@ public class CA extends People
         return cardNum;
     }
 
-    public void setChequing()
+    public void setChequing(double amount)
     {
-        this.chequing = chequing;
+        this.chequing = amount;
 
     }
     public double getChequing()
@@ -134,9 +144,9 @@ public class CA extends People
         return Math.round(chequing*100.0)/100.0;
     }
 
-    public void setSaving()
+    public void setSavings(double amount)
     {
-        this.savings = savings;
+        this.savings = amount;
 
     }
     public double getSavings()
