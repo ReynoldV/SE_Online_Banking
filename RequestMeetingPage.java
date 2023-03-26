@@ -5,7 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 
-public class SettingPage extends JFrame implements ActionListener
+public class RequestMeetingPage extends JFrame implements ActionListener
 {
     static final int WIDTH = 1920;
     static final int LENGTH = 1080;
@@ -13,7 +13,7 @@ public class SettingPage extends JFrame implements ActionListener
     BankAutomated BA;
     HomePage home;
     CA customer;
-    public SettingPage(HomePage home, CA customer)
+    public RequestMeetingPage(BankAutomated BA, HomePage home, CA customer)
     {
         this.setTitle("Account Home");
         this.setLayout(null);
@@ -63,11 +63,13 @@ public class SettingPage extends JFrame implements ActionListener
         Font regFont = new Font("Raleway", Font.BOLD, 60);
         g2.setFont(regFont);
         g2.setColor(new Color(250, 185, 60));
-        g2.drawString("Contact Us", 25, 110);
+        g2.drawString("Request Meeting", 25, 110);
     }
 
+
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e)
+    {
 
     }
 }
